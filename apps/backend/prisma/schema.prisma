@@ -1,0 +1,66 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  scans     Scan[]
+  @@map("users")
+}
+
+model Scan {
+  id            String          @id @default(cuid())
+  userId        String
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobTitle      String?
+  companyName   String?
+  atsScore      Int
+  cvText        String          @db.Text
+  jdText        String          @db.Text
+  topRecommendations String[]   @default([])
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  keywordResults KeywordResult[]
+  bulletEdits   BulletEdit[]
+  @@index([userId])
+  @@map("scans")
+}
+
+enum KeywordStatus {
+  MATCHED
+  MISSING
+}
+
+model KeywordResult {
+  id       String       @id @default(cuid())
+  scanId   String
+  scan     Scan         @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  keyword  String
+  status   KeywordStatus
+  category String?
+  @@index([scanId])
+  @@map("keyword_results")
+}
+
+model BulletEdit {
+  id            String   @id @default(cuid())
+  scanId        String
+  scan          Scan     @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  originalText  String   @db.Text
+  suggestedText String?  @db.Text
+  acceptedText  String?  @db.Text
+  wasAccepted   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  @@index([scanId])
+  @@map("bullet_edits")
+}
