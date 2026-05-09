@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build output
+dist/
+**/dist/
+.next/
+**/.next/
+out/
+**/out/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+**/.env
+**/.env.local
+**/.env.*.local
+**/.env.development
+**/.env.production
+**/.env.test
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# TypeScript build info
+*.tsbuildinfo
+**/*.tsbuildinfo
+apps/backend/tsconfig.tsbuildinfo
+apps/frontend/tsconfig.tsbuildinfo
+
+# Package lockfiles
+package-lock.json
+apps/backend/package-lock.json
+apps/frontend/package-lock.json
+
+# Internal docs
+AGENTS.md
+
+# Prisma
+prisma/migrations/migration_lock.mutable
+**/generated/
+
+# NestJS
+.nest-cli.json
+
+# Turbo (monorepo cache)
+.turbo/
