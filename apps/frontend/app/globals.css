@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Playful Geometric — Light Mode */
+    --background: 26 27% 91%;
+    --foreground: 219 30% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 219 30% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 219 30% 17%;
+
+    --primary: 69 21% 58%;
+    --primary-foreground: 219 30% 17%;
+
+    --secondary: 25 14% 26%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 215 32% 96%;
+    --muted-foreground: 215 20% 32%;
+
+    --accent: 69 21% 58%;
+    --accent-foreground: 219 30% 17%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 0 0% 100%;
+    --ring: 69 21% 58%;
+
+    --radius: 0.5rem;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    /* Custom palette */
+    --success: 152 60% 53%;
+    --success-foreground: 0 0% 100%;
+    --tertiary: 29 51% 60%;
+    --tertiary-foreground: 0 0% 100%;
+    --quaternary: 152 60% 53%;
+    --quaternary-foreground: 0 0% 100%;
+
+    --outline: 215 11% 64%;
+    --outline-variant: 243 7% 34%;
+
+    --surface: 240 10% 3.9%;
+    --surface-container: 240 8% 9%;
+    --surface-container-low: 240 9% 7%;
+    --surface-container-high: 240 6% 14%;
+    --surface-bright: 240 5% 24%;
+    --on-surface: 240 5% 93%;
+    --on-surface-variant: 240 5% 77%;
+    --on-primary: 240 100% 33%;
+    --on-primary-container: 240 100% 33%;
+    --primary-container: 239 100% 76%;
+    --on-secondary: 240 35% 27%;
+    --secondary-container: 240 33% 37%;
+    --on-tertiary: 26 100% 15%;
+    --tertiary-container: 26 77% 49%;
+    --error: 0 88% 70%;
+    --error-foreground: 0 0% 100%;
+    --error-container: 0 92% 30%;
+
+    /* Pop shadows — hard offset, no blur */
+    --shadow-pop: 4px 4px 0px 0px hsl(var(--foreground));
+    --shadow-pop-hover: 6px 6px 0px 0px hsl(var(--foreground));
+    --shadow-pop-active: 2px 2px 0px 0px hsl(var(--foreground));
+    --shadow-sticker: 8px 8px 0px 0px hsl(var(--secondary));
+    --shadow-sticker-pink: 8px 8px 0px 0px hsl(var(--secondary));
+    --shadow-sticker-primary: 8px 8px 0px 0px hsl(var(--primary) / 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  }
+}
+
+@layer components {
+  .score-ring {
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .results-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .results-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .results-scroll::-webkit-scrollbar-thumb {
+    background: rgba(144, 143, 160, 0.2);
+    border-radius: 3px;
+  }
+  .results-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(144, 143, 160, 0.35);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pop-in {
+      animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    @keyframes pop-in {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .wiggle {
+      animation: wiggle 0.6s ease-in-out;
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(3deg); }
+      75% { transform: rotate(-3deg); }
+    }
+  }
+
+  .bg-dot-grid {
+    background-image: radial-gradient(hsl(var(--outline-variant) / 0.15) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .bg-diagonal-stripes {
+    background: repeating-linear-gradient(
+      45deg,
+      hsl(var(--outline-variant) / 0.05),
+      hsl(var(--outline-variant) / 0.05) 10px,
+      transparent 10px,
+      transparent 20px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
